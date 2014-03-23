@@ -292,4 +292,7 @@ phi			{ return PHI_OP; }
 	return NAME;
 }
 
-
+. {
+	yyerror("unknown character %c", *yytext);
+	were_lexer_errors = true;
+}
