@@ -28,6 +28,22 @@
 #include <stdint.h>
 #include "ir/ir.h"
 
+/* We declare this here, and then say that we define our own YYLTYPE, so that
+ * we don't have to include parser.h here. We can't include parser.h, because
+ * parser.h uses symbols defined here (and includes ast.h), so then we would
+ * have a circular dependency.
+ */
+
+typedef struct YYLTYPE {
+	int first_line;
+	int first_column;
+	int last_line;
+	int last_column;
+} YYLTYPE;
+
+#define YYLTYPE_IS_DECLARED 1
+#define YYLTYPE_IS_TRIVIAL 1
+
 typedef enum {
 	ast_special_reg_unif,
 	ast_special_reg_vary,
@@ -130,6 +146,7 @@ typedef struct {
 		char *name;
 		ast_special_reg special_reg;
 	} reg;
+	YYLTYPE location;
 } ast_alu_reg;
 
 typedef struct {
@@ -137,12 +154,14 @@ typedef struct {
 	uint32_t immediate;
 	ast_alu_reg reg;
 	ast_pack_op pack;
+	YYLTYPE pack_location, imm_location;
 } ast_alu_input;
 
 typedef struct {
 	ast_alu_reg reg;
 	ast_pack_op pack;
 	qpu_rotation rotate;
+	YYLTYPE pack_location;
 } ast_alu_output;
 
 typedef struct {
@@ -156,6 +175,8 @@ typedef struct {
 	
 	unsigned num_inputs;
 	ast_alu_input inputs[2];
+	
+	YYLTYPE location;
 } ast_alu_instr;
 
 //Branch Instructions
@@ -164,6 +185,7 @@ typedef struct {
 	char *label;
 	bool has_offset;
 	ast_alu_reg offset;
+	YYLTYPE label_location;
 } ast_branch_dest;
 
 typedef struct {
@@ -206,6 +228,7 @@ typedef struct {
 typedef struct _ast_phi_src {
 	char *reg_name, *label;
 	struct _ast_phi_src *next;
+	YYLTYPE name_location, label_location;
 } ast_phi_src;
 
 typedef struct {
@@ -217,6 +240,7 @@ typedef struct {
 	
 	char *dest_name;
 	ast_phi_src_list src_list;
+	YYLTYPE dest_location;
 } ast_phi_instr;
 
 typedef struct _ast_block {

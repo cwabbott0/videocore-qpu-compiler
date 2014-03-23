@@ -207,6 +207,7 @@ alu_instruction:
 		$$->set_flags = $3;
 		$$->output = $4;
 		$$->inputs[0] = $6;
+		$$->location = @$;
 	}
 	| ALU_OP opt_alu_cond opt_setf alu_output ',' alu_input ',' alu_input
 	{
@@ -219,6 +220,7 @@ alu_instruction:
 		$$->output = $4;
 		$$->inputs[0] = $6;
 		$$->inputs[1] = $8;
+		$$->location = @$;
 	}
 
 opt_alu_cond:
@@ -238,6 +240,7 @@ alu_output:
 		$$.reg = $1;
 		$$.pack = $2;
 		$$.rotate = $3;
+		$$.pack_location = @2;
 	}
 
 opt_rotate:
@@ -251,11 +254,13 @@ alu_input:
 		$$.is_immediate = false;
 		$$.reg = $1;
 		$$.pack = $2;
+		$$.pack_location = @2;
 	}
 	| IMMEDIATE /* small immediates */
 	{
 		$$.is_immediate = true;
 		$$.immediate = $1;
+		$$.imm_location = @1;
 	}
 
 opt_pack:
@@ -268,20 +273,24 @@ alu_reg:
 	{
 		$$.type = ast_reg_type_acc;
 		$$.reg.acc_index = $1;
+		$$.location = @$;
 	}
 	| '%' NAME
 	{
 		$$.type = ast_reg_type_named;
 		$$.reg.name = $2;
+		$$.location = @$;
 	}
 	| SPECIAL_REG
 	{
 		$$.type = ast_reg_type_special;
 		$$.reg.special_reg = $1;
+		$$.location = @$;
 	}
 	| '-' /* nop */
 	{
 		$$.type = ast_reg_type_nop;
+		$$.location = @$;
 	}
 
 ldi_instruction:
@@ -337,12 +346,17 @@ branch_instruction:
 
 branch_dest:
 	  NAME
-	{ $$.has_offset = false; $$.label = $1; }
+	{
+		$$.has_offset = false;
+		$$.label = $1;
+		$$.label_location = @1;
+	}
 	| NAME '+' alu_reg
 	{
 		$$.has_offset = true;
 		$$.offset = $3;
 		$$.label = $1;
+		$$.label_location = @1;
 	}
 
 opt_branch_cond:
@@ -358,6 +372,10 @@ phi_instruction:
 		$$->base.type = qpu_instr_type_phi;
 		$$->dest_name = $3;
 		$$->src_list = $5;
+		$$->dest_location.first_line = @2.first_line;
+		$$->dest_location.first_column = @2.first_column;
+		$$->dest_location.last_line = @3.last_line;
+		$$->dest_location.last_column = @3.last_column;
 	}
 
 phi_source_list:
@@ -378,4 +396,6 @@ phi_source:
 		$$ = calloc(1, sizeof(ast_phi_src));
 		$$->reg_name = $2;
 		$$->label = $4;
+		$$->name_location = @2;
+		$$->label_location = @4;
 	}
