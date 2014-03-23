@@ -104,53 +104,53 @@ v8muld		{ yylval.alu_op = qpu_alu_op_v8muld; return ALU_OP; }
 v8min		{ yylval.alu_op = qpu_alu_op_v8min; return ALU_OP; }
 v8max		{ yylval.alu_op = qpu_alu_op_v8max; return ALU_OP; }
 
-never		{ yylval.alu_cond = qpu_alu_cond_never; return ALU_COND; }
-zs			{ yylval.alu_cond = qpu_alu_cond_zs; return ALU_COND; }
-zc			{ yylval.alu_cond = qpu_alu_cond_zc; return ALU_COND; }
-ns			{ yylval.alu_cond = qpu_alu_cond_ns; return ALU_COND; }
-nc			{ yylval.alu_cond = qpu_alu_cond_nc; return ALU_COND; }
-cs			{ yylval.alu_cond = qpu_alu_cond_cs; return ALU_COND; }
-cc			{ yylval.alu_cond = qpu_alu_cond_cc; return ALU_COND; }
+".never"	{ yylval.alu_cond = qpu_alu_cond_never; return ALU_COND; }
+".zs"		{ yylval.alu_cond = qpu_alu_cond_zs; return ALU_COND; }
+".zc"		{ yylval.alu_cond = qpu_alu_cond_zc; return ALU_COND; }
+".ns"		{ yylval.alu_cond = qpu_alu_cond_ns; return ALU_COND; }
+".nc"		{ yylval.alu_cond = qpu_alu_cond_nc; return ALU_COND; }
+".cs"		{ yylval.alu_cond = qpu_alu_cond_cs; return ALU_COND; }
+".cc"		{ yylval.alu_cond = qpu_alu_cond_cc; return ALU_COND; }
 
-16a			{ yylval.pack_op = ast_pack_16a; return PACK; } /* float32 <=> float32 */
-16b			{ yylval.pack_op = ast_pack_16b; return PACK; }
-16as		{ yylval.pack_op = ast_pack_16as; return PACK; } /* int32 <=> int32 */
-16bs		{ yylval.pack_op = ast_pack_16bs; return PACK; }
-16au		{ yylval.pack_op = ast_pack_16au; return PACK; } /* uint32 <=> uint32 */
-16bu		{ yylval.pack_op = ast_pack_16bu; return PACK; }
-8dr			{ yylval.pack_op = ast_pack_8dr; return PACK; } /* color ([0, 255] <=> [0, 1]) */
-8a			{ yylval.pack_op = ast_pack_8a; return PACK; }
-8b			{ yylval.pack_op = ast_pack_8b; return PACK; }
-8c			{ yylval.pack_op = ast_pack_8c; return PACK; }
-8d			{ yylval.pack_op = ast_pack_8d; return PACK; }
-8abcd		{ yylval.pack_op = ast_pack_8abcd; return PACK; }
-8au			{ yylval.pack_op = ast_pack_8au; return PACK; } /* unsigned (take lowest 8 bits) */
-8bu			{ yylval.pack_op = ast_pack_8bu; return PACK; }
-8cu			{ yylval.pack_op = ast_pack_8cu; return PACK; }
-8du			{ yylval.pack_op = ast_pack_8du; return PACK; }
-8abcdu		{ yylval.pack_op = ast_pack_8abcdu; return PACK; }
-8as			{ yylval.pack_op = ast_pack_8as; return PACK; } /* saturate */
-8bs			{ yylval.pack_op = ast_pack_8bs; return PACK; }
-8cs			{ yylval.pack_op = ast_pack_8cs; return PACK; }
-8ds			{ yylval.pack_op = ast_pack_8ds; return PACK; }
-8abcds		{ yylval.pack_op = ast_pack_8abcds; return PACK; }
+".16a"		{ yylval.pack_op = ast_pack_16a; return PACK; } /* float32 <=> float32 */
+".16b"		{ yylval.pack_op = ast_pack_16b; return PACK; }
+".16as"		{ yylval.pack_op = ast_pack_16as; return PACK; } /* int32 <=> int32 */
+".16bs"		{ yylval.pack_op = ast_pack_16bs; return PACK; }
+".16au"		{ yylval.pack_op = ast_pack_16au; return PACK; } /* uint32 <=> uint32 */
+".16bu"		{ yylval.pack_op = ast_pack_16bu; return PACK; }
+".8dr"		{ yylval.pack_op = ast_pack_8dr; return PACK; } /* color ([0, 255] <=> [0, 1]) */
+".8a"		{ yylval.pack_op = ast_pack_8a; return PACK; }
+".8b"		{ yylval.pack_op = ast_pack_8b; return PACK; }
+".8c"		{ yylval.pack_op = ast_pack_8c; return PACK; }
+".8d"		{ yylval.pack_op = ast_pack_8d; return PACK; }
+".8abcd"	{ yylval.pack_op = ast_pack_8abcd; return PACK; }
+".8au"		{ yylval.pack_op = ast_pack_8au; return PACK; } /* unsigned (take lowest 8 bits) */
+".8bu"		{ yylval.pack_op = ast_pack_8bu; return PACK; }
+".8cu"		{ yylval.pack_op = ast_pack_8cu; return PACK; }
+".8du"		{ yylval.pack_op = ast_pack_8du; return PACK; }
+".8abcdu"	{ yylval.pack_op = ast_pack_8abcdu; return PACK; }
+".8as"		{ yylval.pack_op = ast_pack_8as; return PACK; } /* saturate */
+".8bs"		{ yylval.pack_op = ast_pack_8bs; return PACK; }
+".8cs"		{ yylval.pack_op = ast_pack_8cs; return PACK; }
+".8ds"		{ yylval.pack_op = ast_pack_8ds; return PACK; }
+".8abcds"	{ yylval.pack_op = ast_pack_8abcds; return PACK; }
 
-r5rot		{ yylval.rotation = qpu_rot_r5; return ROTATE; }
-rot1		{ yylval.rotation = qpu_rot1; return ROTATE; }
-rot2		{ yylval.rotation = qpu_rot2; return ROTATE; }
-rot3		{ yylval.rotation = qpu_rot3; return ROTATE; }
-rot4		{ yylval.rotation = qpu_rot4; return ROTATE; }
-rot5		{ yylval.rotation = qpu_rot5; return ROTATE; }
-rot6		{ yylval.rotation = qpu_rot6; return ROTATE; }
-rot7		{ yylval.rotation = qpu_rot7; return ROTATE; }
-rot8		{ yylval.rotation = qpu_rot8; return ROTATE; }
-rot9		{ yylval.rotation = qpu_rot9; return ROTATE; }
-rot10		{ yylval.rotation = qpu_rot10; return ROTATE; }
-rot11		{ yylval.rotation = qpu_rot11; return ROTATE; }
-rot12		{ yylval.rotation = qpu_rot12; return ROTATE; }
-rot13		{ yylval.rotation = qpu_rot13; return ROTATE; }
-rot14		{ yylval.rotation = qpu_rot14; return ROTATE; }
-rot15		{ yylval.rotation = qpu_rot15; return ROTATE; }
+".r5rot"	{ yylval.rotation = qpu_rot_r5; return ROTATE; }
+".rot1"		{ yylval.rotation = qpu_rot1; return ROTATE; }
+".rot2"		{ yylval.rotation = qpu_rot2; return ROTATE; }
+".rot3"		{ yylval.rotation = qpu_rot3; return ROTATE; }
+".rot4"		{ yylval.rotation = qpu_rot4; return ROTATE; }
+".rot5"		{ yylval.rotation = qpu_rot5; return ROTATE; }
+".rot6"		{ yylval.rotation = qpu_rot6; return ROTATE; }
+".rot7"		{ yylval.rotation = qpu_rot7; return ROTATE; }
+".rot8"		{ yylval.rotation = qpu_rot8; return ROTATE; }
+".rot9"		{ yylval.rotation = qpu_rot9; return ROTATE; }
+".rot10"	{ yylval.rotation = qpu_rot10; return ROTATE; }
+".rot11"	{ yylval.rotation = qpu_rot11; return ROTATE; }
+".rot12"	{ yylval.rotation = qpu_rot12; return ROTATE; }
+".rot13"	{ yylval.rotation = qpu_rot13; return ROTATE; }
+".rot14"	{ yylval.rotation = qpu_rot14; return ROTATE; }
+".rot15"	{ yylval.rotation = qpu_rot15; return ROTATE; }
 
 r0			{ yylval.index = 0; return ACCUM_REG; }
 r1			{ yylval.index = 1; return ACCUM_REG; }
@@ -239,7 +239,7 @@ anync		{ yylval.branch_cond = qpu_branch_cond_anync; return BRANCH_COND; }
 
 phi			{ return PHI_OP; }
 
-setf		{ return SETF; }
+".setf"		{ return SETF; }
 
 "-"?([1-9][0-9]*|0)"."[0-9]*([eE]"-"?[0-9]+)? {
 	float imm = strtof(yytext, NULL);

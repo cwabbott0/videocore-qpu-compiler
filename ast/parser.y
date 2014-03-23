@@ -224,13 +224,12 @@ alu_instruction:
 opt_alu_cond:
 	  /* empty */
 	{ $$ = qpu_alu_cond_always; }
-	| '.' ALU_COND
-	{ $$ = $2; }
+	| ALU_COND
 
 opt_setf:
 	  /* empty */
 	{ $$ = false; }
-	| '.' SETF
+	| SETF
 	{ $$ = true; }
 
 alu_output:
@@ -244,8 +243,7 @@ alu_output:
 opt_rotate:
 	  /* empty */
 	{ $$ = qpu_rot0; }
-	| '.' ROTATE
-	{ $$ = $2; }
+	| ROTATE
 
 alu_input:
 	  alu_reg opt_pack
@@ -263,8 +261,7 @@ alu_input:
 opt_pack:
 	  /* empty */
 	{ $$ = ast_pack_none; }
-	| '.' PACK
-	{ $$ = $2; }
+	| PACK
 
 alu_reg:
 	  ACCUM_REG
