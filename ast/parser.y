@@ -362,8 +362,7 @@ branch_dest:
 opt_branch_cond:
 	  /* empty */
 	{ $$ = qpu_branch_cond_always; }
-	| '.' BRANCH_COND
-	{ $$ = $2; }
+	| BRANCH_COND
 
 phi_instruction:
 	  PHI_OP '%' NAME ',' phi_source_list

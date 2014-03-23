@@ -68,7 +68,6 @@ void yyerror(char *s, ...);
 <comment>"*"+"/"        BEGIN(INITIAL);
 
 ","			{ return ','; }
-"."			{ return '.'; }
 "+"			{ return '+'; }
 "%"			{ return '%'; }
 "-"			{ return '-'; }
@@ -224,18 +223,18 @@ loadam		{ yylval.signal_op = qpu_signal_loadam; return SIGNAL_OP; }
 
 bra			{ return BRANCH_OP; }
 
-allz		{ yylval.branch_cond = qpu_branch_cond_allz; return BRANCH_COND; }
-allnz		{ yylval.branch_cond = qpu_branch_cond_allnz; return BRANCH_COND; }
-anyz		{ yylval.branch_cond = qpu_branch_cond_anyz; return BRANCH_COND; }
-anynz		{ yylval.branch_cond = qpu_branch_cond_anynz; return BRANCH_COND; }
-alln		{ yylval.branch_cond = qpu_branch_cond_alln; return BRANCH_COND; }
-allnn		{ yylval.branch_cond = qpu_branch_cond_allnn; return BRANCH_COND; }
-anyn		{ yylval.branch_cond = qpu_branch_cond_anyn; return BRANCH_COND; }
-anynn		{ yylval.branch_cond = qpu_branch_cond_anynn; return BRANCH_COND; }
-allc		{ yylval.branch_cond = qpu_branch_cond_allc; return BRANCH_COND; }
-allnc		{ yylval.branch_cond = qpu_branch_cond_allnc; return BRANCH_COND; }
-anyc		{ yylval.branch_cond = qpu_branch_cond_anyc; return BRANCH_COND; }
-anync		{ yylval.branch_cond = qpu_branch_cond_anync; return BRANCH_COND; }
+".allz"		{ yylval.branch_cond = qpu_branch_cond_allz; return BRANCH_COND; }
+".allnz"	{ yylval.branch_cond = qpu_branch_cond_allnz; return BRANCH_COND; }
+".anyz"		{ yylval.branch_cond = qpu_branch_cond_anyz; return BRANCH_COND; }
+".anynz"	{ yylval.branch_cond = qpu_branch_cond_anynz; return BRANCH_COND; }
+".alln"		{ yylval.branch_cond = qpu_branch_cond_alln; return BRANCH_COND; }
+".allnn"	{ yylval.branch_cond = qpu_branch_cond_allnn; return BRANCH_COND; }
+".anyn"		{ yylval.branch_cond = qpu_branch_cond_anyn; return BRANCH_COND; }
+".anynn"	{ yylval.branch_cond = qpu_branch_cond_anynn; return BRANCH_COND; }
+".allc"		{ yylval.branch_cond = qpu_branch_cond_allc; return BRANCH_COND; }
+".allnc"	{ yylval.branch_cond = qpu_branch_cond_allnc; return BRANCH_COND; }
+".anyc"		{ yylval.branch_cond = qpu_branch_cond_anyc; return BRANCH_COND; }
+".anync"	{ yylval.branch_cond = qpu_branch_cond_anync; return BRANCH_COND; }
 
 phi			{ return PHI_OP; }
 
