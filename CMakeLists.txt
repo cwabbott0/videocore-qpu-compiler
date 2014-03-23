@@ -9,6 +9,8 @@ ADD_FLEX_BISON_DEPENDENCY(lexer parser)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} .)
 
+add_definitions(-std=c99)
+
 add_executable(videocore-qpu-compiler main.c ast/ast.c ${BISON_parser_OUTPUTS} ${FLEX_lexer_OUTPUTS})
 
 install(TARGETS videocore-qpu-compiler RUNTIME DESTINATION bin)

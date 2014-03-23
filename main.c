@@ -125,8 +125,14 @@ int main(int argc, char **argv) {
 		usage();
 	}
 	
-	if (!ast_parse(fp))
+	ast_program *prog = ast_parse(fp);
+	
+	fclose(fp);
+	
+	if (!prog)
 		return 1;
+	
+	ast_program_delete(prog);
 	
     return 0;
 }
